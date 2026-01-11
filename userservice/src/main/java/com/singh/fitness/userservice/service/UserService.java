@@ -6,11 +6,14 @@ import com.singh.fitness.userservice.exception.UserAlreadyExistsException;
 import com.singh.fitness.userservice.model.User;
 import com.singh.fitness.userservice.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.jspecify.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class UserService {
 
     @Autowired
@@ -57,5 +60,10 @@ public class UserService {
 
         return userResponse;
 
+    }
+
+    public Boolean existByUserId(String userId) {
+        log.info("Calling User Service for: {}", userId);
+        return userRepository.existsById(userId);
     }
 }
